@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Task Board</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ 
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="header-left">
+      <h1>My Task Board</h1>
+      <!-- Task counter badge — updated by JS -->
+      <span id="task-counter" class="badge">0 tasks</span>
+    </div>
+ 
+    <div class="header-right">
+      <!-- Priority filter dropdown -->
+      <label for="priority-filter">Filter:</label>
+      <select id="priority-filter">
+        <option value="all">All Priorities</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+  </header>
+ 
+  <!-- ========== MAIN BOARD ========== -->
+  <main class="board">
+ 
+    <!-- Column 1: To Do -->
+    <section id="todo" class="column">
+      <h2 class="column-title">📋 To Do</h2>
+      <ul class="task-list" id="todo-list">
+        <!-- Task cards will be added here by JS -->
+      </ul>
+      <button class="btn-add" data-column="todo">+ Add Task</button>
+    </section>
+ 
+    <!-- Column 2: In Progress -->
+    <section id="inprogress" class="column">
+      <h2 class="column-title">⚙️ In Progress</h2>
+      <ul class="task-list" id="inprogress-list">
+        <!-- Task cards will be added here by JS -->
+      </ul>
+      <button class="btn-add" data-column="inprogress">+ Add Task</button>
+    </section>
+ 
+    <!-- Column 3: Done -->
+    <section id="done" class="column">
+      <h2 class="column-title">✅ Done</h2>
+      <ul class="task-list" id="done-list">
+        <!-- Task cards will be added here by JS -->
+      </ul>
+      <button class="btn-add" data-column="done">+ Add Task</button>
+      <!-- Clear All button for Done column -->
+      <button class="btn-clear" id="btn-clear-done">🗑 Clear All</button>
+    </section>
+ 
+  </main>
+ 
+  <!-- ========== MODAL ========== -->
+  <!-- Hidden by default; shown when user clicks "Add Task" or "Edit" -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h2 id="modal-title">Add Task</h2>
+ 
+      <!-- Task Title -->
+      <label for="input-title">Title</label>
+      <input type="text" id="input-title" placeholder="Enter task title..." />
+ 
+      <!-- Task Description -->
+      <label for="input-description">Description</label>
+      <textarea id="input-description" rows="3" placeholder="Enter description..."></textarea>
+ 
+      <!-- Priority -->
+      <label for="input-priority">Priority</label>
+      <select id="input-priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+ 
+      <!-- Due Date -->
+      <label for="input-due-date">Due Date</label>
+      <input type="date" id="input-due-date" />
+ 
+      <!-- Modal Buttons -->
+      <div class="modal-buttons">
+        <button id="btn-save">Save</button>
+        <button id="btn-cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+ 
+  <script src="taskmanager.js"></script>
+</body>
+</html>
