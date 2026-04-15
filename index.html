@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
- 
+
   <!-- ========== HEADER ========== -->
   <header>
     <div class="header-left">
@@ -15,7 +15,7 @@
       <!-- Task counter badge — updated by JS -->
       <span id="task-counter" class="badge">0 tasks</span>
     </div>
- 
+
     <div class="header-right">
       <!-- Priority filter dropdown -->
       <label for="priority-filter">Filter:</label>
@@ -27,10 +27,10 @@
       </select>
     </div>
   </header>
- 
+
   <!-- ========== MAIN BOARD ========== -->
   <main class="board">
- 
+
     <!-- Column 1: To Do -->
     <section id="todo" class="column">
       <h2 class="column-title">📋 To Do</h2>
@@ -39,7 +39,7 @@
       </ul>
       <button class="btn-add" data-column="todo">+ Add Task</button>
     </section>
- 
+
     <!-- Column 2: In Progress -->
     <section id="inprogress" class="column">
       <h2 class="column-title">⚙️ In Progress</h2>
@@ -48,7 +48,7 @@
       </ul>
       <button class="btn-add" data-column="inprogress">+ Add Task</button>
     </section>
- 
+
     <!-- Column 3: Done -->
     <section id="done" class="column">
       <h2 class="column-title">✅ Done</h2>
@@ -59,23 +59,23 @@
       <!-- Clear All button for Done column -->
       <button class="btn-clear" id="btn-clear-done">🗑 Clear All</button>
     </section>
- 
+
   </main>
- 
+
   <!-- ========== MODAL ========== -->
   <!-- Hidden by default; shown when user clicks "Add Task" or "Edit" -->
   <div id="modal-overlay" class="modal-overlay hidden">
     <div class="modal">
       <h2 id="modal-title">Add Task</h2>
- 
+
       <!-- Task Title -->
       <label for="input-title">Title</label>
       <input type="text" id="input-title" placeholder="Enter task title..." />
- 
+
       <!-- Task Description -->
       <label for="input-description">Description</label>
       <textarea id="input-description" rows="3" placeholder="Enter description..."></textarea>
- 
+
       <!-- Priority -->
       <label for="input-priority">Priority</label>
       <select id="input-priority">
@@ -83,11 +83,21 @@
         <option value="medium">Medium</option>
         <option value="high">High</option>
       </select>
- 
+
       <!-- Due Date -->
       <label for="input-due-date">Due Date</label>
       <input type="date" id="input-due-date" />
- 
+
+      <!-- Move To Column — only visible when EDITING an existing task -->
+      <div id="move-to-wrapper" class="move-to-wrapper hidden">
+        <label for="input-column">Move To Column</label>
+        <select id="input-column">
+          <option value="todo">📋 To Do</option>
+          <option value="inprogress">⚙️ In Progress</option>
+          <option value="done">✅ Done</option>
+        </select>
+      </div>
+
       <!-- Modal Buttons -->
       <div class="modal-buttons">
         <button id="btn-save">Save</button>
@@ -95,7 +105,7 @@
       </div>
     </div>
   </div>
- 
+
   <script src="taskmanager.js"></script>
 </body>
 </html>
