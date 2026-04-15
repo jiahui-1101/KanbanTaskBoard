@@ -1,0 +1,442 @@
+/* ============================
+   CSS Variables & Reset
+   ============================ */
+:root {
+  --bg-page:        #f0f2f5;
+  --bg-column:      #e4e8ee;
+  --bg-card:        #ffffff;
+  --bg-header:      #1a1f2e;
+
+  --accent-todo:    #4f7ef8;
+  --accent-prog:    #f5a623;
+  --accent-done:    #27ae60;
+
+  --priority-high:   #e74c3c;
+  --priority-medium: #f39c12;
+  --priority-low:    #27ae60;
+
+  --text-primary:   #1a1f2e;
+  --text-secondary: #6b7280;
+  --text-light:     #ffffff;
+
+  --shadow-card:  0 2px 8px rgba(0,0,0,0.08);
+  --shadow-modal: 0 20px 60px rgba(0,0,0,0.25);
+
+  --radius-card:   10px;
+  --radius-btn:    7px;
+  --radius-badge:  5px;
+
+  --font-main: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  --transition: 0.2s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* ============================
+   HEADER
+   ============================ */
+header {
+  background-color: var(--bg-header);
+  color: var(--text-light);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+header h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Task counter badge */
+.badge {
+  background-color: var(--accent-todo);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-right label {
+  font-size: 0.85rem;
+  color: #a0aec0;
+}
+
+.header-right select {
+  background-color: #2d3548;
+  color: var(--text-light);
+  border: 1px solid #3d4a66;
+  border-radius: var(--radius-btn);
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.header-right select:focus {
+  border-color: var(--accent-todo);
+}
+
+/* ============================
+   BOARD LAYOUT (3 columns)
+   ============================ */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================
+   COLUMN
+   ============================ */
+.column {
+  background-color: var(--bg-column);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 300px;
+}
+
+/* Colored top border per column */
+#todo      { border-top: 4px solid var(--accent-todo); }
+#inprogress{ border-top: 4px solid var(--accent-prog); }
+#done      { border-top: 4px solid var(--accent-done); }
+
+.column-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding-bottom: 6px;
+}
+
+/* ============================
+   TASK LIST (ul)
+   ============================ */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;          /* takes up remaining space in column */
+}
+
+/* ============================
+   TASK CARD (li)
+   ============================ */
+.task-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 14px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Task title — double-click to edit inline */
+.task-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: text;
+  word-break: break-word;
+}
+
+.task-title:hover {
+  color: var(--accent-todo);
+}
+
+/* Task description */
+.task-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+/* Due date row */
+.task-due {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* Card footer: priority badge + action buttons */
+.task-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+/* ============================
+   PRIORITY BADGE
+   ============================ */
+.priority-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: var(--radius-badge);
+  color: white;
+}
+
+.priority-badge.high   { background-color: var(--priority-high); }
+.priority-badge.medium { background-color: var(--priority-medium); }
+.priority-badge.low    { background-color: var(--priority-low); }
+
+/* ============================
+   CARD ACTION BUTTONS
+   ============================ */
+.card-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.card-actions button {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border: none;
+  border-radius: var(--radius-badge);
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity var(--transition);
+}
+
+.card-actions button:hover {
+  opacity: 0.8;
+}
+
+.btn-edit   { background-color: #ebf1ff; color: var(--accent-todo); }
+.btn-delete { background-color: #fef0ef; color: var(--priority-high); }
+
+/* ============================
+   INLINE EDIT INPUT
+   (replaces title on dblclick)
+   ============================ */
+.inline-edit-input {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border: 2px solid var(--accent-todo);
+  border-radius: 4px;
+  padding: 2px 6px;
+  width: 100%;
+  outline: none;
+}
+
+/* ============================
+   ADD TASK BUTTON (per column)
+   ============================ */
+.btn-add {
+  background-color: transparent;
+  border: 2px dashed #c0c8d8;
+  color: var(--text-secondary);
+  border-radius: var(--radius-btn);
+  padding: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color var(--transition), color var(--transition);
+  font-weight: 500;
+}
+
+.btn-add:hover {
+  border-color: var(--accent-todo);
+  color: var(--accent-todo);
+}
+
+/* ============================
+   CLEAR DONE BUTTON
+   ============================ */
+.btn-clear {
+  background-color: #fef0ef;
+  border: none;
+  color: var(--priority-high);
+  border-radius: var(--radius-btn);
+  padding: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color var(--transition);
+}
+
+.btn-clear:hover {
+  background-color: #fcd9d7;
+}
+
+/* ============================
+   MODAL OVERLAY
+   ============================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;                         /* covers full screen */
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+/* Modal box */
+.modal {
+  background-color: var(--bg-card);
+  border-radius: 14px;
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow-modal);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: modal-in 0.2s ease;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(-16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.modal h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.modal label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Shared input styling */
+.modal input[type="text"],
+.modal input[type="date"],
+.modal textarea,
+.modal select {
+  width: 100%;
+  border: 1.5px solid #dde2ec;
+  border-radius: var(--radius-btn);
+  padding: 9px 12px;
+  font-size: 0.9rem;
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition);
+  resize: vertical;
+}
+
+.modal input:focus,
+.modal textarea:focus,
+.modal select:focus {
+  border-color: var(--accent-todo);
+}
+
+/* Modal footer buttons */
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.modal-buttons button:hover { opacity: 0.85; }
+
+#btn-save   { background-color: var(--accent-todo); color: white; }
+#btn-cancel { background-color: #f0f2f5; color: var(--text-secondary); }
+
+/* ============================
+   UTILITY CLASSES
+   ============================ */
+
+/* Used by JS to hide cards during filter */
+.is-hidden {
+  display: none !important;
+}
+
+/* Fade-out animation for delete / clear done */
+@keyframes fade-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.9); }
+}
+
+.fade-out {
+  animation: fade-out 0.3s ease forwards;
+}
+
+/* ============================
+   RESPONSIVE (tablet / mobile)
+   ============================ */
+@media (max-width: 768px) {
+  .board {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
